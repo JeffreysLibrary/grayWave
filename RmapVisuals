@@ -1,4 +1,6 @@
-Create Map Visuals
+Create Map Visualizations: Counties
+
+==always start
 
 library(ggplot2)
 library(dplyr)
@@ -6,10 +8,28 @@ library(tidyverse)
 library(maps)
 
 county_map <- map_data("county")
+
+
+==one county
+
 show <- subset(county_map, region == "pennsylvania" & subregion %in% c("butler"))
 
-ggplot() 
-+ geom_polygon(data = county_map, aes(x = long, y = lat, group = group), fill = "gray90", color = "white") 
-+ geom_polygon(data = show, aes(x = long, y = lat, group = group), fill = "steelblue") 
-+ coord_fixed() 
-+ theme_void()
+
+ggplot() +
+geom_polygon(data = county_map, aes(x = long, y = lat, group = group), fill = "gray90", color = "white") +
+geom_polygon(data = show, aes(x = long, y = lat, group = group), fill = "steelblue") +
+coord_fixed() +
+theme_void()
+
+
+==two counties
+
+show <- subset(county_map, region == "pennsylvania" & subregion %in% c("butler"))
+show2 <- subset(county_map, region == "pennsylvania" & subreagion %in% c("centre"))
+
+ggplot() +
+geom_polygon(data = county_map, aes(x = long, y = lat, group = group), fill = "gray90", color = "white") +
+geom_polygon(data = show, aes(x = long, y = lat, group = group), fill = "steelblue") +
+geom_polygon(data = show2, aes(x = long, y = lat, group = group), fill = "steelblue") +
+coord_fixed() +
+theme_void()
